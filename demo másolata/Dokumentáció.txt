@@ -1,0 +1,64 @@
+Projekt Dokumentáció: Google OAuth2-s Alkalmazás
+Projekt Áttekintés
+
+A Google OAuth2-s alkalmazás egy Spring Boot alkalmazás, amely lehetővé teszi a felhasználók autentikációját a Google OAuth2 segítségével, majd kezeli a hirdetésekkel kapcsolatos műveleteket. Az alkalmazás Google OAuth2 autentikációt használ, és a felhasználóknak be kell jelentkezniük a Google fiókjukkal az alkalmazás használatához.
+
+Felhasznált Eszközök
+
+A projekt során a következő eszközök és technológiák kerültek felhasználásra:
+
+    Google OAuth2: Az autentikáció és az OAuth2 tokenek kezeléséhez a Google OAuth2-t használja.
+
+    H2 Adatbázis: Az alkalmazás H2 adatbázist használ, amely egy beágyazott adatbázis a könnyű fejlesztés és tesztelés céljából. (A céges számítógép tűzfala letiltotta más adatbázis használatát, amit nem állt módomban kikapcsolni.)   
+
+    Postman: A Postman egy API tesztelő eszköz, amely segít a RESTful API-k tesztelésében és dokumentálásában.
+
+    IntelliJ: Az IntelliJ IDEA egy népszerű fejlesztői környezet, amelyet a projekt kódolásához használunk.
+
+Token Kiadása a Postman Segítségével
+
+A projekt teszteléséhez a Postman használható az alkalmazás API végpontjainak teszteléséhez. A token kiadásához kövesd az alábbi lépéseket a Postman-ben:
+
+    Válaszd ki a "OAuth 2.0" opciót legördülő menüből.
+
+    Az "OAuth 2.0" beállítások alatt konfiguráld a következő paramétereket:
+        Token Name: JobToken
+        Grant Type: Authorization Code
+        Callback URL: https://oauth.pstmn.io/v1/callback
+        Auth URL: https://accounts.google.com/o/oauth2/auth
+        Access Token URL: https://accounts.google.com/o/oauth2/token
+        Client ID: 830434470217-fimeodfjas9ni9o5hvb7grr8rt1gseqe.apps.googleusercontent.com
+        Client Secret: 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
+        Scope: email profile openid
+        State: State
+        Client Authentication: Advanced
+        Refresh Token URL: https://accounts.google.com/o/oauth2/token
+
+    Miután beállítottad ezeket a paramétereket, kattints a "Get New Access Token" gombra az authentikációs token kiadásához.
+
+    A Google OAuth2 felugró ablakban jelentkezz be a Google fiókoddal és engedélyezd az alkalmazást.
+
+    Az authentikáció sikeres befejezése után megkapod az access token-t és refresh token-t a Postmanben.
+
+    A teszteléshez használd az token id -t.
+
+    A token id beillesztése után a végpontok elérhetővé válnak a tesztelő számára.
+
+
+API Végpontok
+
+Az alkalmazás a következő API végpontokat kínálja:
+
+    GET /api/f1/ad/AllAd: Az összes hirdetés lekérdezése.
+
+    GET /api/f1/ad/{Ad_id}: Egy adott hirdetés lekérdezése azonosító alapján.
+
+    PUT /api/f1/ad/{Ad_id}: Egy adott hirdetés frissítése azonosító alapján.
+
+    POST /api/f1/ad: Új hirdetés létrehozása.
+
+    DELETE /api/f1/ad/{Ad_id}: Egy adott hirdetés törlése azonosító alapján.
+
+    GET /images/{id}: Kép letöltése azonosító alapján.
+
+    POST /images: Kép feltöltése.
